@@ -17,19 +17,37 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  String title = "Tap the screen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(title),
+      ),
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            title = DateTime.now().toIso8601String();
+          });
+        },
+        child: Container(
+          color: Colors.white,
+        ),
       ),
     );
   }
